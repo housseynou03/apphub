@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mon app meteo</title>
+    <link rel="stylesheet" href="cour.css">
+    <script src="jquery.js"></script>
+    <link rel="shortcut icon" href="fond.jpeg">
+</head>
+<body>
+    <div class="container">
+        <video autoplay loop muted plays-inline>
+            <source src="v.mp4" type="video/mp4">
+        </video>
+        <h1>Méteo actuelle</h1>
+        <form>
+            <label for="ville">ville: </label>
+            <input type="text" id="ville" name="ville" placeholder="saisissez le nom d'une ville" required>
+            <button type="submit">afficher la météo</button>
+        </form>
+        <div id="meteo"></div>
+    </div>
+    <script>
+        function affichermeteo(data){
+            var ville=data.name;
+            var temperature=Math.round(data.main.temp);
+            var description=data.weather[0].description;
+            var humidite = data.main.humidity;
+            var vent =data.wind.speed;
+
+            $("#meteo").html('<h2> ville : ' + ville + '</h2>' + '<p> temperature : ' + temperature + '°</p>' + '<p> description : '+ description + '</p>' + '<p> himidite : ' + humidite + '%</p>' + '<p> vent : '+ vent +'m/s</p>');
+        }
+        function afficherville(ville){
+            var url = 'https://api.openweathermap.org/data/2.5/weather?q=' + ville + '&units=metric&lang=fr&appid=664fcc254fedcd385b4dfd7c75b9baac&lang=fra';
+    
+        $.ajax({
+            url : url,
+            datatype:'json',
+            method:'Get',
+            success:function (data) {
+                affichermeteo(data);
+            },
+            error:function(){
+                $('#meteo').html('<p> erreur </p>');
+            }
+
+        });
+        }
+         
+        $('form').on('submit', function(e){
+            e.preventDefault();
+            var ville= $('#ville').val();
+            afficherville(ville);    
+        })
+    </script>
+</body>
+</html>
