@@ -88,8 +88,11 @@ button:hover {
 
 @media screen and (max-width: 480px) {
     /* CSS rules for devices with a screen width of 480px or less */
-    .container video, .container #meteo{
-        max-width: 100%;
-        min-height: auto;
+    .container video{
+        min-width: 100%;
+        max-height: auto;
+    }
+    .container{
+        width: 100% !important;
     }
 }
