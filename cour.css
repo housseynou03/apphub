@@ -85,14 +85,12 @@ button:hover {
     z-index: -1;
 }
 /*adaptation a tout les ecrans*/
-
 @media screen and (max-width: 480px) {
-    /* CSS rules for devices with a screen width of 480px or less */
     .container video{
         min-width: 100%;
         max-height: auto;
     }
     .container{
-        width: 100% !important;
+       min-width: 100%;
     }
 }
